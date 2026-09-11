@@ -78,12 +78,14 @@ export async function POST(req: NextRequest) {
     }));
 
     const response = await ai.models.generateContent({
-      model: process.env.GEMINI_MODEL || "gemini-2.0-flash",
+      model: process.env.GEMINI_MODEL || "gemini-3.6-flash",
       contents,
       config: {
         systemInstruction: systemPrompt,
         temperature: 0.6,
-        maxOutputTokens: 500,
+        // Los modelos Gemini 3.x usan tokens de razonamiento interno:
+        // presupuesto amplio para que la respuesta nunca se corte.
+        maxOutputTokens: 4096,
       },
     });
 
