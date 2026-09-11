@@ -1,26 +1,207 @@
 @import "tailwindcss";
 
+/* ───────────────────────── Days Style Store · Sistema de diseño ─────────────────────────
+   Modo claro: blanco + dorado · Modo oscuro: negro + dorado */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fdfcf9;
+  --foreground: #1c1917;
+  --card: #ffffff;
+  --card-foreground: #1c1917;
+  --muted: #f5f2ea;
+  --muted-foreground: #78716c;
+  --border: #eae4d4;
+  --input: #e5dfd0;
+  --ring: #d4af37;
+
+  --primary: #b8942a;
+  --primary-strong: #a17e1f;
+  --primary-foreground: #ffffff;
+
+  --gold: #d4af37;
+  --gold-soft: #ecd98b;
+  --gold-deep: #8a6d1d;
+
+  --accent: #faf3df;
+  --accent-foreground: #614d22;
+
+  --destructive: #dc2626;
+
+  --shadow-gold: 0 10px 40px -12px rgb(212 175 55 / 0.45);
+  --hero-glow: radial-gradient(ellipse 60% 50% at 50% 0%, rgb(212 175 55 / 0.16), transparent 70%);
+}
+
+.dark {
+  --background: #0a0a0b;
+  --foreground: #f4f1e8;
+  --card: #131315;
+  --card-foreground: #f4f1e8;
+  --muted: #1b1b1e;
+  --muted-foreground: #a8a29e;
+  --border: #26262a;
+  --input: #2a2a2e;
+  --ring: #d4af37;
+
+  --primary: #d4af37;
+  --primary-strong: #e3c25c;
+  --primary-foreground: #141414;
+
+  --gold: #d4af37;
+  --gold-soft: #f0dfa0;
+  --gold-deep: #d4af37;
+
+  --accent: #1e1b12;
+  --accent-foreground: #ecd98b;
+
+  --destructive: #ef4444;
+
+  --shadow-gold: 0 10px 40px -12px rgb(212 175 55 / 0.35);
+  --hero-glow: radial-gradient(ellipse 60% 50% at 50% 0%, rgb(212 175 55 / 0.12), transparent 70%);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-strong: var(--primary-strong);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-gold-deep: var(--gold-deep);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-playfair), Georgia, serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgb(212 175 55 / 0.35);
+  color: var(--foreground);
+}
+
+/* Scrollbar dorado */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--muted); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--gold), var(--gold-deep));
+  border-radius: 8px;
+  border: 2px solid var(--muted);
+}
+
+/* ── Utilidades de marca ── */
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.text-gradient-gold {
+  background: linear-gradient(120deg, #8a6d1d 0%, #d4af37 35%, #f5e6b3 50%, #d4af37 65%, #8a6d1d 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gold-shimmer 6s linear infinite;
+}
+
+.dark .text-gradient-gold {
+  background: linear-gradient(120deg, #d4af37 0%, #f0dfa0 35%, #fff8dc 50%, #f0dfa0 65%, #d4af37 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+@keyframes gold-shimmer {
+  to { background-position: 200% center; }
+}
+
+.gold-line {
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  height: 1px;
+}
+
+.gold-ring {
+  box-shadow: 0 0 0 1px rgb(212 175 55 / 0.4), 0 8px 30px -8px rgb(212 175 55 / 0.35);
+}
+
+.glass {
+  background: color-mix(in srgb, var(--card) 72%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.hero-bg {
+  background: var(--hero-glow);
+}
+
+/* Botón flotante WhatsApp pulso */
+@keyframes wa-pulse {
+  0% { box-shadow: 0 0 0 0 rgb(37 211 102 / 0.5); }
+  70% { box-shadow: 0 0 0 16px rgb(37 211 102 / 0); }
+  100% { box-shadow: 0 0 0 0 rgb(37 211 102 / 0); }
+}
+.wa-pulse { animation: wa-pulse 2.4s infinite; }
+
+/* Marquesina */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+/* Flotación suave para elementos 3D/destacados */
+@keyframes float-soft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate-float-soft { animation: float-soft 5s ease-in-out infinite; }
+
+/* Skeleton shimmer */
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+.skeleton {
+  background: linear-gradient(110deg, var(--muted) 8%, color-mix(in srgb, var(--muted) 60%, var(--gold-soft)) 18%, var(--muted) 33%);
+  background-size: 200% 100%;
+  animation: shimmer 1.8s linear infinite;
+}
+
+/* Tarjeta con tilt 3D */
+.tilt-card {
+  transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease;
+}
+.tilt-card:hover {
+  transform: perspective(900px) rotateX(4deg) rotateY(-6deg) translateY(-6px);
+}
+
+/* Respeta la preferencia de menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee, .animate-float-soft, .wa-pulse, .text-gradient-gold {
+    animation: none !important;
+  }
+  html { scroll-behavior: auto; }
+  .tilt-card:hover { transform: none; }
+  .tilt-card { transition: none; }
 }

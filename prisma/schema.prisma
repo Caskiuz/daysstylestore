@@ -1,0 +1,204 @@
+// Days Style Store — Esquema de base de datos (Neon Postgres)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─────────────────────────── USUARIOS Y TRABAJADORAS ───────────────────────────
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         String   @default("WORKER") // ADMIN | WORKER
+  createdAt    DateTime @default(now())
+  worker       Worker?
+}
+
+model Worker {
+  id       String @id @default(cuid())
+  userId   String @unique
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  phone    String?
+  code     String @unique // código de referida para enlaces compartibles
+  active   Boolean @default(true)
+  createdAt DateTime @default(now())
+
+  orders      Order[]
+  credits     RewardCredit[]
+  redemptions Redemption[]
+  progress    WorkerProductProgress[]
+}
+
+// ─────────────────────────── CATÁLOGO ───────────────────────────
+
+model Category {
+  id        String    @id @default(cuid())
+  name      String
+  slug      String    @unique
+  image     String?
+  sortOrder Int       @default(0)
+  products  Product[]
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String   @default("")
+  priceUsd    Float
+  images      String[] @default([])
+  categoryId  String
+  category    Category @relation(fields: [categoryId], references: [id])
+  featured    Boolean  @default(false)
+  active      Boolean  @default(true)
+  tag         String? // NUEVO | HOT | OFERTA ...
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  variants   ProductVariant[]
+  orderItems OrderItem[]
+  credits    RewardCredit[]
+  progress   WorkerProductProgress[]
+  prizes     Redemption[]
+}
+
+model ProductVariant {
+  id        String  @id @default(cuid())
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  size      String  @default("Única")
+  color     String  @default("Estándar")
+  stock     Int     @default(0)
+}
+
+// ─────────────────────────── PEDIDOS Y PAGOS ───────────────────────────
+
+model Order {
+  id            String    @id @default(cuid())
+  code          String    @unique // DS-0001
+  workerId      String?
+  worker        Worker?   @relation(fields: [workerId], references: [id])
+  customerName  String
+  customerPhone String
+  currency      String    @default("USD") // moneda de muestra elegida
+  rateSnapshot  Float     @default(1) // tasa USD->moneda al crear
+  totalUsd      Float     @default(0)
+  status        String    @default("PENDIENTE")
+  // PENDIENTE | CONFIRMADO | EN_REPARTO | ENTREGADA_TRABAJADORA | ENTREGADA_CLIENTE | CERRADO | CANCELADO
+  notes         String?
+  source        String    @default("MANUAL") // MANUAL | WHATSAPP | REFERIDA
+  deliveredAt   DateTime? // fecha de entrega al cliente
+  balanceDueAt  DateTime? // vencimiento del 50% restante (+15 días)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  items   OrderItem[]
+  payments Payment[]
+}
+
+model OrderItem {
+  id              String  @id @default(cuid())
+  orderId         String
+  order           Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId       String
+  product         Product @relation(fields: [productId], references: [id])
+  variantId       String?
+  variantSnapshot String  @default("") // "M / Negro"
+  nameSnapshot    String
+  unitPriceUsd    Float
+  quantity        Int     @default(1)
+}
+
+model Payment {
+  id          String   @id @default(cuid())
+  orderId     String
+  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  amountUsd   Float // normalizado a USD para contabilidad
+  currency    String // USD | COP | VES
+  rate        Float // tasa usada
+  amountLocal Float // monto en la moneda recibida
+  method      String // EFECTIVO | BANCOLOMBIA | NEQUI | ...
+  reference   String? // comprobante / referencia
+  note        String?
+  createdAt   DateTime @default(now())
+}
+
+// ─────────────────────────── PREMIOS "VENDES N, GANAS 1" ───────────────────────────
+
+model RewardCredit {
+  id        String   @id @default(cuid())
+  workerId  String
+  worker    Worker   @relation(fields: [workerId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product  @relation(fields: [productId], references: [id])
+  orderId   String?
+  quantity  Int      @default(1) // créditos ganados
+  valueUsd  Float // valor por crédito al ganarlo
+  createdAt DateTime @default(now())
+}
+
+model Redemption {
+  id        String    @id @default(cuid())
+  workerId  String
+  worker    Worker    @relation(fields: [workerId], references: [id], onDelete: Cascade)
+  type      String // PRODUCTO | EFECTIVO
+  productId String?
+  product   Product?  @relation(fields: [productId], references: [id])
+  variantId String?
+  amountUsd Float
+  currency  String? // para efectivo: COP | USD
+  status    String    @default("PENDIENTE") // PENDIENTE | APROBADO | RECHAZADO
+  note      String?
+  createdAt DateTime  @default(now())
+  resolvedAt DateTime?
+}
+
+model WorkerProductProgress {
+  id        String  @id @default(cuid())
+  workerId  String
+  worker    Worker  @relation(fields: [workerId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  units     Int     @default(0)
+
+  @@unique([workerId, productId])
+}
+
+// ─────────────────────────── CONTABILIDAD Y CONFIGURACIÓN ───────────────────────────
+
+model Expense {
+  id        String   @id @default(cuid())
+  concept   String
+  amountUsd Float
+  currency  String   @default("USD")
+  category  String   @default("GENERAL") // GENERAL | COMPRA_MERCANCIA | ENVIO | SERVICIO | PREMIO ...
+  date      DateTime @default(now())
+  note      String?
+}
+
+model Setting {
+  id              String  @id @default("main")
+  storeName       String  @default("Days Style Store")
+  tagline         String  @default("Moda que te hace brillar")
+  whatsapp        String  @default("") // número internacional sin +
+  instagram        String?
+  facebook         String?
+  tiktok           String?
+  email            String?
+  address          String?
+  aboutText        String  @default("")
+  aiPrompt         String  @default("")
+  aiEnabled        Boolean @default(true)
+  usdToCop         Float   @default(3900)
+  usdToVes         Float   @default(40)
+  rewardUnits      Int     @default(4) // regla global: cada N unidades -> 1 premio
+  currenciesEnabled String[] @default(["USD", "COP"])
+  paymentMethods   Json    @default("[]")
+}

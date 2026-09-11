@@ -1,0 +1,25 @@
+<svg width="600" height="800" viewBox="0 0 600 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b3552e"/><stop offset="1" stop-color="#2e1508"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F5E6B3"/><stop offset=".5" stop-color="#D4AF37"/><stop offset="1" stop-color="#8A6D1D"/>
+    </linearGradient>
+    <radialGradient id="glow" cx=".5" cy=".35" r=".6">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".25"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="600" height="800" fill="url(#bg)"/>
+  <rect width="600" height="800" fill="url(#glow)"/>
+  <circle cx="470" cy="180" r="130" fill="none" stroke="url(#gold)" stroke-width="2" opacity=".5"/>
+  <circle cx="470" cy="180" r="100" fill="none" stroke="url(#gold)" stroke-width="1" opacity=".35"/>
+  <circle cx="130" cy="640" r="90" fill="none" stroke="url(#gold)" stroke-width="2" opacity=".4"/>
+  <path d="M0 700 Q 150 640 300 700 T 600 700 V800 H0 Z" fill="#000" opacity=".14"/>
+  <path d="M0 730 Q 150 670 300 730 T 600 730 V800 H0 Z" fill="#000" opacity=".1"/>
+  <text x="300" y="360" text-anchor="middle" font-family="Georgia, serif" font-size="120" font-weight="bold" fill="url(#gold)" opacity=".9">DS</text>
+  <rect x="220" y="405" width="160" height="2" fill="url(#gold)" opacity=".8"/>
+  <text x="300" y="470" text-anchor="middle" font-family="Georgia, serif" font-size="34" font-weight="bold" fill="#fff" opacity=".95">Sunset</text>
+  <text x="300" y="512" text-anchor="middle" font-family="Arial, sans-serif" font-size="19" letter-spacing="6" fill="#D4AF37">VESTIDO · PLAYA</text>
+  <text x="300" y="760" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" letter-spacing="4" fill="#fff" opacity=".65">DAYS STYLE STORE</text>
+</svg>
