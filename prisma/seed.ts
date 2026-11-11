@@ -13,7 +13,7 @@ const PAYMENT_METHODS = [
 ];
 
 const CATEGORIES = [
-  { name: "Calzado", slug: "calzado", sortOrder: 6 },
+  { name: "Calzado", slug: "calzado", sortOrder: 6, image: "/products/sandalias-36000-07.jpg" },
 ];
 
 const SIZES_TOP = ["S", "M", "L", "XL"];

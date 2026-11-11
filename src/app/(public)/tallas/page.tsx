@@ -1,11 +1,33 @@
 import type { Metadata } from "next";
-import { Ruler, Footprints, Clock, PenLine } from "lucide-react";
+import { Ruler, Footprints, Scissors, Clock, PenLine } from "lucide-react";
 import { Reveal } from "@/components/animations/reveal";
 import { SectionTitle } from "@/components/home/sections";
 
 export const metadata: Metadata = {
   title: "Guía de tallas",
   description: "Encuentra tu talla perfecta en Days Style Store: tablas de medidas, consejos para medirte y asesoría personal gratuita por WhatsApp.",
+};
+
+const TOP_TABLE = {
+  headers: ["Talla", "US", "Busto (cm)", "Cintura (cm)", "Cadera (cm)"],
+  rows: [
+    ["S", "2–4", "80–84", "62–66", "86–90"],
+    ["M", "6–8", "85–89", "67–71", "91–95"],
+    ["L", "10–12", "90–94", "72–76", "96–100"],
+    ["XL", "14–16", "95–100", "77–83", "101–106"],
+    ["XXL", "18–20", "101–107", "84–90", "107–113"],
+  ],
+};
+
+const PANTS_TABLE = {
+  headers: ["Talla", "US", "Cintura (cm)", "Cadera (cm)", "Largo interno (cm)"],
+  rows: [
+    ["26", "2", "66–69", "88–91", "76"],
+    ["28", "4", "70–73", "92–95", "77"],
+    ["30", "6", "74–77", "96–99", "78"],
+    ["32", "8", "78–82", "100–104", "79"],
+    ["34", "10", "83–87", "105–109", "79"],
+  ],
 };
 
 const CALZADO_TABLE = {
@@ -53,8 +75,9 @@ function SizeTable({ title, data }: { title: string; data: typeof CALZADO_TABLE 
 
 export default function TallasPage() {
   const tips = [
-    { icon: Footprints, title: "Pisa una hoja", text: "Apoya el pie sobre una hoja, marca el talón y el dedo más largo, y mide la distancia con una regla." },
-    { icon: Clock, title: "Mide al final del día", text: "El pie se expande con las horas. Mídelo por la tarde, de pie y con el peso repartido en ambos pies." },
+    { icon: Scissors, title: "Mide con cinta suave", text: "Para ropa, mide busto, cintura y caderas con una cinta métrica sobre la ropa ajustada, sin apretar." },
+    { icon: Footprints, title: "Pisa una hoja", text: "Para calzado, apoya el pie sobre una hoja, marca el talón y el dedo más largo, y mide la distancia." },
+    { icon: Clock, title: "Mide al final del día", text: "Tanto el cuerpo como el pie se expanden con las horas. Toma tus medidas por la tarde, de pie y relajada." },
     { icon: PenLine, title: "Mide ambos pies", text: "Un pie suele ser un poco más grande. Guíate por el más largo y, si dudas entre dos tallas, elige la mayor." },
   ];
 
@@ -66,7 +89,7 @@ export default function TallasPage() {
         </div>
         <h1 className="font-display text-4xl font-bold">Tu <span className="text-gradient-gold">talla perfecta</span></h1>
         <p className="mx-auto mt-3 max-w-lg text-muted-foreground">
-          Medirte bien es la clave para que cada par te quede espectacular. Si dudas, escríbenos: te asesoramos gratis por WhatsApp.
+          Medirte bien es la clave para que cada prenda te quede espectacular. Si dudas, escríbenos: te asesoramos gratis por WhatsApp.
         </p>
       </div>
 
@@ -83,6 +106,14 @@ export default function TallasPage() {
       </div>
 
       <div className="mt-12 space-y-10">
+        <div>
+          <SectionTitle kicker="Blusas · Vestidos · Tops" title="Tallas superiores" />
+          <div className="mt-6"><SizeTable title="Superiores" data={TOP_TABLE} /></div>
+        </div>
+        <div>
+          <SectionTitle kicker="Jeans · Pantalones · Faldas" title="Tallas inferiores" />
+          <div className="mt-6"><SizeTable title="Inferiores" data={PANTS_TABLE} /></div>
+        </div>
         <div>
           <SectionTitle kicker="Sandalias · Chanclas" title="Tallas de calzado" />
           <div className="mt-6"><SizeTable title="Calzado (tallas EU)" data={CALZADO_TABLE} /></div>

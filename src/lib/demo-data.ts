@@ -29,7 +29,7 @@ export const DEMO_SETTINGS: StoreSettings = {
 };
 
 const DEMO_CATEGORIES: PublicCategory[] = [
-  { id: "c6", name: "Calzado", slug: "calzado", image: null },
+  { id: "c6", name: "Calzado", slug: "calzado", image: "/products/sandalias-36000-07.jpg" },
 ];
 
 function makeVariants(sizes: string[], colors: string[], stock: number) {

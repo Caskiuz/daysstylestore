@@ -38,16 +38,30 @@ export function CategoriesSection({ categories }: { categories: PublicCategory[]
               href={`/shop?cat=${cat.slug}`}
               className={`group relative flex aspect-[4/5] flex-col justify-end overflow-hidden rounded-2xl bg-gradient-to-br p-4 transition-transform duration-300 hover:-translate-y-1.5 ${gradients[i % gradients.length]}`}
             >
-              <span className="font-display text-xl font-bold text-white">{cat.name}</span>
-              <span className="mt-0.5 text-xs text-gold-soft">
+              {cat.image && (
+                <>
+                  <Image
+                    src={cat.image}
+                    alt={cat.name}
+                    fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
+                </>
+              )}
+              <span className="relative font-display text-xl font-bold text-white">{cat.name}</span>
+              <span className="relative mt-0.5 text-xs text-gold-soft">
                 {cat.productCount !== undefined ? `${cat.productCount} productos` : "Ver colección"}
               </span>
-              <span className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full border border-gold/50 text-gold transition-all duration-300 group-hover:bg-gold group-hover:text-[#2a2005]">
+              <span className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full border border-gold/50 text-gold transition-all duration-300 group-hover:bg-gold group-hover:text-[#2a2005]">
                 <ArrowRight size={15} className="transition-transform group-hover:-rotate-45" />
               </span>
-              <div className="pointer-events-none absolute -right-6 -top-6 font-display text-[7rem] font-bold leading-none text-gold/10 transition-all duration-500 group-hover:text-gold/20">
-                {cat.name.charAt(0)}
-              </div>
+              {!cat.image && (
+                <div className="pointer-events-none absolute -right-6 -top-6 font-display text-[7rem] font-bold leading-none text-gold/10 transition-all duration-500 group-hover:text-gold/20">
+                  {cat.name.charAt(0)}
+                </div>
+              )}
             </Link>
           </StaggerItem>
         ))}

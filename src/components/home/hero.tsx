@@ -110,7 +110,7 @@ export function Hero({ storeName, whatsapp }: { storeName: string; whatsapp: str
         <div className="flex overflow-hidden">
           <div className="animate-marquee flex shrink-0 items-center gap-10 pr-10 text-sm font-semibold uppercase tracking-[0.2em] text-muted-foreground">
             {Array.from({ length: 2 }).flatMap((_, k) =>
-              ["Sandalias", "✦", "Chanclas", "✦", "Tallas 34 al 40", "✦", "Nueva colección", "✦"].map((t, i) => (
+              ["Nueva colección", "✦", "Ropa", "✦", "Calzado", "✦", "Accesorios", "✦", "Moda que te hace brillar", "✦"].map((t, i) => (
                 <span key={`${k}-${i}`} className={t === "✦" ? "text-gold" : ""}>{t}</span>
               ))
             )}

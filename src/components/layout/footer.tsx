@@ -3,9 +3,9 @@ import { Mail, MapPin, MessageCircle, Sparkles } from "lucide-react";
 import { LogoMark } from "@/components/logo";
 import { FacebookIcon, InstagramIcon, TikTokIcon } from "@/components/social-icons";
 import { waLink, generalMessage } from "@/lib/whatsapp";
-import type { StoreSettings } from "@/lib/types";
+import type { PublicCategory, StoreSettings } from "@/lib/types";
 
-export function Footer({ settings }: { settings: StoreSettings }) {
+export function Footer({ settings, categories }: { settings: StoreSettings; categories: PublicCategory[] }) {
   const year = new Date().getFullYear();
 
   return (
@@ -45,6 +45,9 @@ export function Footer({ settings }: { settings: StoreSettings }) {
           <h4 className="mb-4 text-sm font-bold uppercase tracking-wider text-primary">Tienda</h4>
           <ul className="space-y-2.5 text-sm text-muted-foreground">
             <li><Link href="/shop" className="transition-colors hover:text-primary">Todos los productos</Link></li>
+            {categories.map((c) => (
+              <li key={c.id}><Link href={`/shop?cat=${c.slug}`} className="transition-colors hover:text-primary">{c.name}</Link></li>
+            ))}
             <li><Link href="/tallas" className="transition-colors hover:text-primary">Guía de tallas</Link></li>
             <li><Link href="/wishlist" className="transition-colors hover:text-primary">Lista de deseos</Link></li>
           </ul>
