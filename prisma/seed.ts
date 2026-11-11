@@ -13,11 +13,6 @@ const PAYMENT_METHODS = [
 ];
 
 const CATEGORIES = [
-  { name: "Blusas & Tops", slug: "blusas", sortOrder: 1 },
-  { name: "Pantalones & Jeans", slug: "pantalones", sortOrder: 2 },
-  { name: "Vestidos", slug: "vestidos", sortOrder: 3 },
-  { name: "Faldas & Shorts", slug: "faldas", sortOrder: 4 },
-  { name: "Accesorios", slug: "accesorios", sortOrder: 5 },
   { name: "Calzado", slug: "calzado", sortOrder: 6 },
 ];
 
@@ -34,46 +29,6 @@ type DemoProduct = {
 
 const PRODUCTS: DemoProduct[] = [
   {
-    name: "Blusa Satén Brillo Dorado", slug: "blusa-saten-brillo-dorado", cat: "blusas", priceUsd: 14.99, tag: "NUEVO", featured: true,
-    sizes: SIZES_TOP, colors: ["Champán", "Negro", "Blanco"], stock: 8, image: "/products/blusa-saten.svg",
-    description: "Blusa en satén con caída fluida y acabado perlado. Perfecta para brillar de día o de noche. Tela suave, fresca y elegante.",
-  },
-  {
-    name: "Jeans Slim Tiro Alto Premium", slug: "jeans-slim-tiro-alto", cat: "pantalones", priceUsd: 22.99, tag: "HOT", featured: true,
-    sizes: SIZES_PANTS, colors: ["Azul medio", "Negro", "Celeste"], stock: 10, image: "/products/jeans-slim.svg",
-    description: "Jeans slim de tiro alto con denim premium que moldea la figura. Comodidad total y diseño que estiliza en cada paso.",
-  },
-  {
-    name: "Vestido Midi Noche Estrellada", slug: "vestido-midi-noche", cat: "vestidos", priceUsd: 27.5, tag: "NUEVO", featured: true,
-    sizes: SIZES_DRESS, colors: ["Negro", "Vino"], stock: 6, image: "/products/vestido-midi.svg",
-    description: "Vestido midi ajustado con tejido elástico y brillo sutil. Tu aliado perfecto para citas y ocasiones especiales.",
-  },
-  {
-    name: "Blusa Crop Encaje Delicado", slug: "blusa-crop-encaje", cat: "blusas", priceUsd: 11.99,
-    sizes: SIZES_TOP, colors: ["Blanco", "Negro"], stock: 12, image: "/products/blusa-crop.svg",
-    description: "Crop top de encaje delicado con forro interior. Romántico, fresco y súper combinable con tus jeans favoritos.",
-  },
-  {
-    name: "Pantalón Palazzo Fluido", slug: "pantalon-palazzo", cat: "pantalones", priceUsd: 19.99,
-    sizes: SIZES_TOP, colors: ["Negro", "Cheetos", "Beige"], stock: 9, image: "/products/palazzo.svg",
-    description: "Pantalón palazzo de caída fluida que alarga la silueta. Elegancia bohemia con comodidad increíble.",
-  },
-  {
-    name: "Falda Jean Mini Clásica", slug: "falda-jean-mini", cat: "faldas", priceUsd: 15.5,
-    sizes: SIZES_PANTS, colors: ["Azul claro", "Azul oscuro"], stock: 7, image: "/products/falda-jean.svg",
-    description: "Falda mini de jean con detalle de botones dorados. Un básico infaltable del armario, corte perfecto.",
-  },
-  {
-    name: "Vestido Playa Tropical Sunset", slug: "vestido-playa-tropical", cat: "vestidos", priceUsd: 18.99, featured: true,
-    sizes: ["S/M", "L/XL"], colors: ["Atardecer", "Turquesa"], stock: 11, image: "/products/vestido-playa.svg",
-    description: "Vestido ligero estampado con colores del atardecer. Ideal para vacaciones: se seca rápido y no se arruga.",
-  },
-  {
-    name: "Set Accesorios Gold Essence", slug: "set-accesorios-gold", cat: "accesorios", priceUsd: 9.99, tag: "OFERTA",
-    sizes: ["Única"], colors: ["Dorado"], stock: 20, image: "/products/accesorios-gold.svg",
-    description: "Set de accesorios bañados en oro: aretes, collar y pulsera. El toque final dorado para cualquier outfit.",
-  },
-{
     name: "Sandalias Greca Camel", slug: "sandalias-greca-camel", cat: "calzado", priceUsd: 12, tag: "NUEVO",
     sizes: SIZES_CALZADO, colors: ["Camel"], stock: 5,
     image: "/products/sandalias-36000-01.jpg", extraImages: [],
@@ -411,7 +366,6 @@ async function main() {
   }
 
   // ── Productos ──
-  const productIds: Record<string, string> = {};
   for (const p of PRODUCTS) {
     const product = await prisma.product.upsert({
       where: { slug: p.slug },
@@ -429,57 +383,6 @@ async function main() {
           create: p.sizes.flatMap((size) =>
             p.colors.map((color) => ({ size, color, stock: p.stock }))
           ),
-        },
-      },
-    });
-    productIds[p.slug] = product.id;
-  }
-
-  // ── Pedidos de ejemplo con la trabajadora demo ──
-  const worker = workerUser.worker!;
-  const existingOrders = await prisma.order.count();
-  if (existingOrders === 0) {
-    const now = new Date();
-    const daysAgo = (d: number) => new Date(now.getTime() - d * 86400000);
-
-    // Pedido 1: entregado al cliente, 50% pagado, saldo por cobrar (venció hace 2 días)
-    const o1 = await prisma.order.create({
-      data: {
-        code: "DS-0001", workerId: worker.id, customerName: "María Pérez", customerPhone: "573006667777",
-        currency: "COP", rateSnapshot: 3900, totalUsd: 37.98, status: "ENTREGADA_CLIENTE",
-        deliveredAt: daysAgo(17), balanceDueAt: daysAgo(2), source: "REFERIDA",
-        items: {
-          create: [
-            { productId: productIds["blusa-saten-brillo-dorado"], nameSnapshot: "Blusa Satén Brillo Dorado", variantSnapshot: "M / Champán", unitPriceUsd: 14.99, quantity: 1 },
-            { productId: productIds["jeans-slim-tiro-alto"], nameSnapshot: "Jeans Slim Tiro Alto Premium", variantSnapshot: "30 / Azul medio", unitPriceUsd: 22.99, quantity: 1 },
-          ],
-        },
-        payments: { create: [{ amountUsd: 18.99, currency: "COP", rate: 3900, amountLocal: 74061, method: "NEQUI", createdAt: daysAgo(17) }] },
-      },
-    });
-    await prisma.payment.create({
-      data: { orderId: o1.id, amountUsd: 18.99, currency: "COP", rate: 3900, amountLocal: 74061, method: "EFECTIVO", createdAt: daysAgo(5) },
-    });
-
-    // Pedido 2: en camino (jefa trae mercancía)
-    await prisma.order.create({
-      data: {
-        code: "DS-0002", workerId: worker.id, customerName: "Carolina Ruiz", customerPhone: "573008889999",
-        currency: "USD", rateSnapshot: 1, totalUsd: 27.5, status: "EN_REPARTO", source: "WHATSAPP",
-        items: { create: [{ productId: productIds["vestido-midi-noche"], nameSnapshot: "Vestido Midi Noche Estrellada", variantSnapshot: "M / Negro", unitPriceUsd: 27.5, quantity: 1 }] },
-      },
-    });
-
-    // Pedido 3: pendiente recién creado
-    await prisma.order.create({
-      data: {
-        code: "DS-0003", workerId: worker.id, customerName: "Andrea Gómez", customerPhone: "573011223344",
-        currency: "COP", rateSnapshot: 3900, totalUsd: 27.49, status: "PENDIENTE", source: "MANUAL",
-        items: {
-          create: [
-            { productId: productIds["blusa-crop-encaje"], nameSnapshot: "Blusa Crop Encaje Delicado", variantSnapshot: "S / Blanco", unitPriceUsd: 11.99, quantity: 1 },
-            { productId: productIds["falda-jean-mini"], nameSnapshot: "Falda Jean Mini Clásica", variantSnapshot: "28 / Azul claro", unitPriceUsd: 15.5, quantity: 1 },
-          ],
         },
       },
     });

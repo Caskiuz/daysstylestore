@@ -110,7 +110,7 @@ export function WorkerManager({ workers, siteUrl }: { workers: WorkerRow[]; site
               )}
 
               <button
-                onClick={() => navigator.clipboard.writeText(`${siteUrl}/producto/jeans-slim-tiro-alto?ref=${w.code}`)}
+                onClick={() => navigator.clipboard.writeText(`${siteUrl}/producto/sandalias-greca-camel?ref=${w.code}`)}
                 className="mt-3 flex w-full items-center justify-center gap-1.5 rounded-xl border border-gold/40 bg-accent px-3 py-2 text-xs font-bold text-accent-foreground transition-colors hover:border-gold cursor-pointer"
               >
                 <Copy size={13} /> Código de referida: <b>{w.code}</b> (copiar link)
