@@ -19,7 +19,7 @@ export default async function NosotrosPage() {
     { icon: Gem, title: "Calidad seleccionada", text: "Cada prenda pasa por nuestras manos antes de llegar a las tuyas: telas, caídas y acabados que se sienten premium." },
     { icon: Users, title: "Mujeres que empoderan", text: "Nuestras asesoras no solo venden moda: construyen sus propios ingresos con el programa Vendes 4, Ganas 1." },
     { icon: Handshake, title: "Trato personal", text: "Nada de robots ni formularios fríos. Cada compra se acompaña de persona a persona, por WhatsApp." },
-    { icon: Sparkles, title: "Brillo accesible", text: "Creemos que vestir bien no debe ser un lujo: precios justos y pagos flexibles 50% y 50% a 15 días." },
+    { icon: Sparkles, title: "Brillo accesible", text: "Creemos que vestir bien no debe ser un lujo: precios justos y pagos flexibles 50% y 50% a 8 días." },
   ];
 
   return (

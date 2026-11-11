@@ -46,7 +46,7 @@ export function Navbar({ whatsapp, session, demo }: { whatsapp: string; session:
         {/* Barra superior */}
         <div className="hidden bg-gradient-to-r from-[#8a6d1d] via-[#d4af37] to-[#8a6d1d] py-1.5 text-center text-[11px] font-semibold uppercase tracking-[0.18em] text-[#241b04] sm:block">
           <Sparkles size={12} className="mr-1 inline" />
-          Envío personalizado · Pago 50% al recibir y 50% a 15 días · Vendes 4 y ganas 1
+          Envío personalizado · Pago 50% al recibir y 50% a 8 días · Vendes 4 y ganas 1
         </div>
 
         <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6">

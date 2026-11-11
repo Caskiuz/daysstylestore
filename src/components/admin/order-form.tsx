@@ -171,7 +171,7 @@ export function OrderForm({
             <div className="flex justify-between"><span className="text-muted-foreground">Total {currency}</span><b>{formatMoney(convertFromUsd(totalUsd, currency, rates), currency)}</b></div>
             <div className="gold-line my-3" />
             <div className="flex justify-between text-xs"><span className="text-muted-foreground">Abono 50% al recibir</span><b>{formatMoney(convertFromUsd(totalUsd / 2, currency, rates), currency)}</b></div>
-            <div className="flex justify-between text-xs"><span className="text-muted-foreground">Saldo a 15 días</span><b>{formatMoney(convertFromUsd(totalUsd / 2, currency, rates), currency)}</b></div>
+            <div className="flex justify-between text-xs"><span className="text-muted-foreground">Saldo a 8 días</span><b>{formatMoney(convertFromUsd(totalUsd / 2, currency, rates), currency)}</b></div>
           </div>
           {done && <p className="mt-4 flex items-center gap-2 text-sm font-bold text-emerald-600"><CheckCircle2 size={16} /> Pedido {done} creado</p>}
           {error && <p className="mt-3 rounded-lg bg-destructive/10 px-3 py-2 text-xs text-destructive">{error}</p>}

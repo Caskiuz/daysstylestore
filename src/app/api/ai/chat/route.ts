@@ -25,7 +25,7 @@ async function buildSystemPrompt(): Promise<string> {
 
 ## Contexto del negocio
 - Venta 100% por WhatsApp con atención personal (número: +${settings.whatsapp}).
-- Pago del cliente: 50% al recibir el pedido y 50% restante a los 15 días.
+- Pago del cliente: 50% al recibir el pedido y 50% restante a los 8 días.
 - Monedas: USD y pesos colombianos (COP). Tasa actual: 1 USD = ${settings.usdToCop} COP${settings.currenciesEnabled.includes("VES") ? `; bolívares VES: 1 USD = ${settings.usdToVes} Bs` : ""}.
 - Entrega: personal por las asesoras o coordinación por WhatsApp.
 - Programa de asesoras "vendes ${settings.rewardUnits}, ganas 1": cada ${settings.rewardUnits} prendas vendidas, la asesora gana 1 prenda gratis o su valor en efectivo; el saldo se puede acumular.

@@ -211,7 +211,7 @@ export async function advanceOrder(orderId: string) {
   await prisma.order.update({
     where: { id: orderId },
     data: next === "ENTREGADA_CLIENTE"
-      ? { status: next, deliveredAt: new Date(), balanceDueAt: addDays(new Date(), 15) }
+      ? { status: next, deliveredAt: new Date(), balanceDueAt: addDays(new Date(), 8) }
       : { status: next },
   });
 

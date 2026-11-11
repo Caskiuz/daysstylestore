@@ -15,7 +15,7 @@ Construida con **Next.js 16** (frontend + backend en uno), lista para desplegar 
 | **Chat IA "Daisy"** | Asistente con Google **Gemini Flash** (gratuito) que responde preguntas del negocio con el catálogo real, precios y políticas — clave: `GEMINI_API_KEY` |
 | **Panel Admin** (`/admin`) | Dashboard con KPIs y gráficos, productos CRUD (variantes talla×color×stock + fotos a Cloudinary), categorías, pedidos con flujo de estados, trabajadoras, premios/canjes, contabilidad con export CSV y configuración completa |
 | **Panel Trabajadora** (`/trabajadora`) | Saldo de premios, progreso "3/4 para ganar 1", registro de pedidos de sus clientas, solicitud de canjes (producto o efectivo) y catálogo con enlaces de referida |
-| **Pagos 50/50** | Cliente paga 50% al recibir y 50% a los 15 días; el sistema agenda el vencimiento y marca los cobros vencidos |
+| **Pagos 50/50** | Cliente paga 50% al recibir y 50% a los 8 días; el sistema agenda el vencimiento y marca los cobros vencidos |
 | **Premios "Vendes N, ganas 1"** | Cada N prendas vendidas de un producto → 1 crédito (valor de la prenda); saldo acumulable canjeable por catálogo o efectivo, con aprobación de la jefa |
 | **Tema** | Modo claro (blanco + dorado) y modo oscuro (negro + dorado) con toggle general, animaciones y efectos 3D en toda la web |
 
@@ -63,7 +63,7 @@ Sin configurar, el admin permite usar imágenes de demo o pegar URLs.
 1. La clienta toca **Comprar por WhatsApp** (o la trabajadora comparte su enlace `?ref=CODIGO`).
 2. La jefa o la trabajadora **registra el pedido** en su panel (el stock se descuenta).
 3. Estados: `Pendiente → Confirmado → En reparto (jefa trae) → Entregada a trabajadora → Entregada a clienta → Cerrado`.
-4. Al marcar **Entregada a clienta**: se programa el cobro (50% restante a 15 días) y el motor de premios suma las unidades vendidas a la trabajadora (cada 4 → 1 crédito).
+4. Al marcar **Entregada a clienta**: se programa el cobro (50% restante a 8 días) y el motor de premios suma las unidades vendidas a la trabajadora (cada 4 → 1 crédito).
 5. La trabajadora **solicita canjes** (productos o efectivo) y la jefa los **aprueba** desde Panel Admin → Premios.
 6. Todo queda en **Contabilidad**: ventas, ingresos por moneda/método, cuentas por cobrar, gastos y utilidad, con exportación a CSV.
 

@@ -95,7 +95,7 @@ model Order {
   notes         String?
   source        String    @default("MANUAL") // MANUAL | WHATSAPP | REFERIDA
   deliveredAt   DateTime? // fecha de entrega al cliente
-  balanceDueAt  DateTime? // vencimiento del 50% restante (+15 días)
+  balanceDueAt  DateTime? // vencimiento del 50% restante (+8 días)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 

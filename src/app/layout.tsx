@@ -33,7 +33,7 @@ export async function generateMetadata(): Promise<Metadata> {
     keywords: ["tienda de ropa", "moda femenina", "Days Style Store", "ropa por WhatsApp", "moda Colombia", "asesoras de moda"],
     openGraph: {
       title: `${s.storeName} — ${s.tagline}`,
-      description: "Moda femenina con asesoras personales. Compra por WhatsApp con pago 50% al recibir y 50% a 15 días.",
+      description: "Moda femenina con asesoras personales. Compra por WhatsApp con pago 50% al recibir y 50% a 8 días.",
       type: "website",
       locale: "es_CO",
       siteName: s.storeName,

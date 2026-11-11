@@ -228,7 +228,7 @@ export function ProductDetail({
         {/* Garantías */}
         <div className="mt-7 grid gap-3 rounded-2xl border border-border bg-card p-4 text-sm">
           <p className="flex items-center gap-2.5"><Truck size={16} className="shrink-0 text-gold" /> Entrega personal por nuestras asesoras</p>
-          <p className="flex items-center gap-2.5"><ShieldCheck size={16} className="shrink-0 text-gold" /> Pago 50% al recibir y 50% a los 15 días</p>
+          <p className="flex items-center gap-2.5"><ShieldCheck size={16} className="shrink-0 text-gold" /> Pago 50% al recibir y 50% a los 8 días</p>
           <p className="flex items-center gap-2.5"><MessageCircle size={16} className="shrink-0 text-gold" /> Asesoría de tallas gratis por WhatsApp</p>
         </div>
       </div>

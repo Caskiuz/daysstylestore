@@ -59,7 +59,7 @@ export default async function ContactoPage() {
       <Reveal delay={0.1} className="mt-8">
         <div className="rounded-2xl border border-gold/30 bg-card p-6">
           <h2 className="flex items-center gap-2 font-display text-lg font-bold"><Wallet size={20} className="text-gold" /> Métodos de pago</h2>
-          <p className="mt-1 text-sm text-muted-foreground">Pagas 50% al recibir tu pedido y el 50% restante a los 15 días.</p>
+          <p className="mt-1 text-sm text-muted-foreground">Pagas 50% al recibir tu pedido y el 50% restante a los 8 días.</p>
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
             {s.paymentMethods.filter((m) => m.enabled).map((m) => (
               <div key={m.id} className="rounded-xl border border-border bg-background/50 p-4">

@@ -13,7 +13,7 @@ const POLICIES: Record<string, { title: string; description: string; sections: {
       { h: "Cómo solicitarlo", p: "Escribe por WhatsApp a tu asesora o al número de la tienda indicando tu nombre, el pedido y el motivo. Coordinaremos la recogida y el cambio sin costo dentro de la ciudad." },
       { h: "Prendas en promoción", p: "Los productos marcados como OFERTA o de liquidación admiten cambio de talla sujeto a disponibilidad, pero no devolución del dinero." },
       { h: "Devolución de dinero", p: "Si la prenda presenta un defecto de fábrica, se reemplaza por una igual o similar; si no es posible, se devuelve el 100% de lo pagado por el mismo medio de pago en máximo 5 días hábiles." },
-      { h: "Pedidos con pago 50/50", p: "En pedidos con saldo pendiente (50% a 15 días), el cambio se realiza sobre el valor total del producto. El saldo pendiente se ajusta si aplica diferencia de precio." },
+      { h: "Pedidos con pago 50/50", p: "En pedidos con saldo pendiente (50% a 8 días), el cambio se realiza sobre el valor total del producto. El saldo pendiente se ajusta si aplica diferencia de precio." },
     ],
   },
   privacidad: {
@@ -32,7 +32,7 @@ const POLICIES: Record<string, { title: string; description: string; sections: {
     description: "Condiciones de uso de la tienda Days Style Store y del programa de asesoras.",
     sections: [
       { h: "Naturaleza del servicio", p: "Days Style Store comercializa ropa femenina por catálogo con gestión de pedidos por WhatsApp. Los precios se muestran en USD y COP; al confirmar un pedido se fija la tasa de cambio vigente." },
-      { h: "Pagos", p: "El esquema estándar es 50% al recibir el pedido y 50% a los 15 días. Los medios de pago habilitados se publican en la página de contacto. El pago se coordina personalmente por WhatsApp; la tienda no utiliza pasarelas de pago automáticas." },
+      { h: "Pagos", p: "El esquema estándar es 50% al recibir el pedido y 50% a los 8 días. Los medios de pago habilitados se publican en la página de contacto. El pago se coordina personalmente por WhatsApp; la tienda no utiliza pasarelas de pago automáticas." },
       { h: "Entregas", p: "Las entregas se realizan de forma personal por nuestras asesoras o por coordenación directa. Los tiempos estimados son orientativos y se confirman al momento del pedido." },
       { h: "Programa de asesoras", p: "El programa «Vendes 4, ganas 1» premia a las asesoras activas: por cada 4 prendas de un mismo producto vendidas y entregadas, la asesora acumula un crédito equivalente al valor de esa prenda. Los créditos se canjean por productos del catálogo o efectivo, previa aprobación de la administración. Los saldos no canjeados no expiran mientras la asesora permanezca activa." },
       { h: "Suspensión de cuentas", p: "La administración puede suspender cuentas de asesoras por incumplimiento de pagos a la tienda, maltrato a clientas o uso indebido de la imagen de la marca." },

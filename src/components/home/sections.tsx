@@ -99,7 +99,7 @@ export function FeaturedSection({ products, storeName, whatsapp }: { products: P
 
 const BENEFITS = [
   { icon: MessageCircle, title: "Compra por WhatsApp", text: "Elige tu prenda, escríbenos y una asesora te guía en todo el proceso, sin formularios complicados." },
-  { icon: HandCoins, title: "Paga 50% y 50%", text: "La mitad al recibir tu pedido y el resto a los 15 días. Compra cómoda y sin presión." },
+  { icon: HandCoins, title: "Paga 50% y 50%", text: "La mitad al recibir tu pedido y el resto a los 8 días. Compra cómoda y sin presión." },
   { icon: PackageCheck, title: "Entrega personal", text: "Nuestras asesoras llevan tu pedido hasta tu puerta y te asesoran con tallas y estilos." },
   { icon: Sparkles, title: "Calidad seleccionada", text: "Cada prenda es escogida a mano: telas, caídas y diseños que te hacen brillar de verdad." },
 ];

@@ -58,7 +58,7 @@ export function Hero({ storeName, whatsapp }: { storeName: string; whatsapp: str
             className="mx-auto mt-5 max-w-lg text-base leading-relaxed text-muted-foreground lg:mx-0 sm:text-lg"
           >
             Descubre prendas seleccionadas para cada ocasión. Compra fácil por WhatsApp, paga{" "}
-            <strong className="text-foreground">50% al recibir</strong> y el resto a 15 días, con la asesoría
+            <strong className="text-foreground">50% al recibir</strong> y el resto a 8 días, con la asesoría
             personal de nuestro equipo.
           </motion.p>
 
