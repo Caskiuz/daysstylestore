@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Ruler, Heart, Shirt, Scissors } from "lucide-react";
+import { Ruler, Footprints, Clock, PenLine } from "lucide-react";
 import { Reveal } from "@/components/animations/reveal";
 import { SectionTitle } from "@/components/home/sections";
 
@@ -8,29 +8,20 @@ export const metadata: Metadata = {
   description: "Encuentra tu talla perfecta en Days Style Store: tablas de medidas, consejos para medirte y asesoría personal gratuita por WhatsApp.",
 };
 
-const TOP_TABLE = {
-  headers: ["Talla", "US", "Busto (cm)", "Cintura (cm)", "Cadera (cm)"],
+const CALZADO_TABLE = {
+  headers: ["Talla (EU)", "Largo del pie (cm)"],
   rows: [
-    ["S", "2–4", "80–84", "62–66", "86–90"],
-    ["M", "6–8", "85–89", "67–71", "91–95"],
-    ["L", "10–12", "90–94", "72–76", "96–100"],
-    ["XL", "14–16", "95–100", "77–83", "101–106"],
-    ["XXL", "18–20", "101–107", "84–90", "107–113"],
+    ["34", "21,5 - 22"],
+    ["35", "22 - 22,5"],
+    ["36", "22,5 - 23,5"],
+    ["37", "23,5 - 24"],
+    ["38", "24 - 24,5"],
+    ["39", "24,5 - 25"],
+    ["40", "25 - 25,5"],
   ],
 };
 
-const PANTS_TABLE = {
-  headers: ["Talla", "US", "Cintura (cm)", "Cadera (cm)", "Largo interno (cm)"],
-  rows: [
-    ["26", "2", "66–69", "88–91", "76"],
-    ["28", "4", "70–73", "92–95", "77"],
-    ["30", "6", "74–77", "96–99", "78"],
-    ["32", "8", "78–82", "100–104", "79"],
-    ["34", "10", "83–87", "105–109", "79"],
-  ],
-};
-
-function SizeTable({ title, data }: { title: string; data: typeof TOP_TABLE }) {
+function SizeTable({ title, data }: { title: string; data: typeof CALZADO_TABLE }) {
   return (
     <Reveal from="scale">
       <div className="overflow-hidden rounded-2xl border border-gold/30">
@@ -62,9 +53,9 @@ function SizeTable({ title, data }: { title: string; data: typeof TOP_TABLE }) {
 
 export default function TallasPage() {
   const tips = [
-    { icon: Scissors, title: "Mide con cinta suave", text: "Coloca la cinta métrica sobre tu ropa más ajustada, sin apretar, manteniéndola paralela al suelo." },
-    { icon: Heart, title: "Busto y cintura", text: "Busto: la parte más prominente. Cintura: la parte más angosta (normalmente 2 cm sobre el ombligo)." },
-    { icon: Shirt, title: "Entre dos tallas", text: "Si estás entre dos tallas, elige la mayor para mayor comodidad, o la menor si prefieres un ajuste más ceñido." },
+    { icon: Footprints, title: "Pisa una hoja", text: "Apoya el pie sobre una hoja, marca el talón y el dedo más largo, y mide la distancia con una regla." },
+    { icon: Clock, title: "Mide al final del día", text: "El pie se expande con las horas. Mídelo por la tarde, de pie y con el peso repartido en ambos pies." },
+    { icon: PenLine, title: "Mide ambos pies", text: "Un pie suele ser un poco más grande. Guíate por el más largo y, si dudas entre dos tallas, elige la mayor." },
   ];
 
   return (
@@ -75,7 +66,7 @@ export default function TallasPage() {
         </div>
         <h1 className="font-display text-4xl font-bold">Tu <span className="text-gradient-gold">talla perfecta</span></h1>
         <p className="mx-auto mt-3 max-w-lg text-muted-foreground">
-          Medirte bien es la clave para que cada prenda te quede espectacular. Si dudas, escríbenos: te asesoramos gratis por WhatsApp.
+          Medirte bien es la clave para que cada par te quede espectacular. Si dudas, escríbenos: te asesoramos gratis por WhatsApp.
         </p>
       </div>
 
@@ -93,12 +84,8 @@ export default function TallasPage() {
 
       <div className="mt-12 space-y-10">
         <div>
-          <SectionTitle kicker="Blusas · Vestidos · Tops" title="Tallas superiores" />
-          <div className="mt-6"><SizeTable title="Superiores" data={TOP_TABLE} /></div>
-        </div>
-        <div>
-          <SectionTitle kicker="Jeans · Pantalones · Faldas" title="Tallas inferiores" />
-          <div className="mt-6"><SizeTable title="Inferiores" data={PANTS_TABLE} /></div>
+          <SectionTitle kicker="Sandalias · Chanclas" title="Tallas de calzado" />
+          <div className="mt-6"><SizeTable title="Calzado (tallas EU)" data={CALZADO_TABLE} /></div>
         </div>
       </div>
 

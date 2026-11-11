@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Tienda",
-  description: "Explora todo el catálogo de Days Style Store: blusas, jeans, vestidos, faldas y accesorios con entrega personalizada.",
+  description: "Explora el catálogo de Days Style Store: sandalias y chanclas de temporada en tallas 34 al 40, con entrega personalizada.",
 };
 
 export default async function ShopPage({

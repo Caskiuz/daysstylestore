@@ -45,9 +45,6 @@ export function Footer({ settings }: { settings: StoreSettings }) {
           <h4 className="mb-4 text-sm font-bold uppercase tracking-wider text-primary">Tienda</h4>
           <ul className="space-y-2.5 text-sm text-muted-foreground">
             <li><Link href="/shop" className="transition-colors hover:text-primary">Todos los productos</Link></li>
-            <li><Link href="/shop?cat=blusas" className="transition-colors hover:text-primary">Blusas & Tops</Link></li>
-            <li><Link href="/shop?cat=pantalones" className="transition-colors hover:text-primary">Pantalones & Jeans</Link></li>
-            <li><Link href="/shop?cat=vestidos" className="transition-colors hover:text-primary">Vestidos</Link></li>
             <li><Link href="/tallas" className="transition-colors hover:text-primary">Guía de tallas</Link></li>
             <li><Link href="/wishlist" className="transition-colors hover:text-primary">Lista de deseos</Link></li>
           </ul>
